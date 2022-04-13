@@ -1,25 +1,54 @@
 #include <stdio.h>
+#include <string.h>
+int A[100], n, OK = 1;
+void In()
+{
+	for (int k = 1; k <= n; k++)
+	{
+		printf("%d", A[k]);
+	}
+	printf(" ");
+}
+void Sinh()
+{
+	int i = n;
+	while (i > 0 && A[i] == 9)
+	{
+		i--;
+	}
+	if (i > 0)
+	{
+		A[i] += 1;
+		if (A[i + 1] == 9)
+		{
+			for (int j = i + 1; j <= n; j++)
+			{
+				A[j] = A[i];
+			}
+		}
+	}
+	else
+	{
+		OK = 0;
+	}
+}
 int main()
 {
-    long long a, b, c, t, e ;
-    scanf("%lld", &t);
-    while (t--)
-    {
-        e=0;
-        scanf("%lld", &a);
-        while (a != 0)
-        {
-            b = a % 10;
-            a = a / 10;
-            c = a % 10;
-            if (b < c)
-            {
-                printf("NO\n");
-                e = 1;
-                break;
-            }
-        }
-        if (e == 0)
-            printf("YES\n");
-    }
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		scanf("%d", &n);
+		OK=1;
+		for (int e = 1; e <= n; e++)
+		{
+			A[e] = 1;
+		}
+		while (OK)
+		{
+			In();
+			Sinh();
+		}
+		printf("\n");
+	}
 }
